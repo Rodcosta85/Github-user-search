@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+   .sun:hover {
+      fill: #697C9A;
+   }
+
+   .moon:hover {
+    fill: #141D2F;
+   }
+}
