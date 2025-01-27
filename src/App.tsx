@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Octokit } from 'octokit';
+import { apiProps } from './typings';
 
 
 // components
@@ -10,20 +11,7 @@ import UserNumbers from './User Numbers/UserNumbers';
 import LocationToCompany from './Location to Company/LocationToCompany';
 
 
-interface apiProps {
-  avatar_url: string,
-  name: string,
-  login: string,
-  bio: string,
-  created_at: string,
-  public_repos: number,
-  followers: number,
-  following: number,
-  location: string,
-  html_url: string,
-  twitter_username: string,
-  company: string,
-}
+
 
 
 function App() {
@@ -78,8 +66,10 @@ function App() {
   }
 
   const octokit = new Octokit({
-    auth: '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'
+    auth: import.meta.env.VITE_GITHUB_TOKEN
+    // acima para o vite
   })
+  // process.env.NOME DA VARIAVEL - no react normal
 
   // styles for interpolation
   const main = 'w-full h-[777px] tablet:h-[900px] desktop:h-[900px] flex flex-col justify-center items-center font-space-mono';
@@ -90,7 +80,7 @@ function App() {
       <DevBtn button={button} handleTheme={handleTheme} />
       <SearchBar button={button} user={user} info={info} handleInput={handleInput} handleSearch={handleSearch} />
       <div className={button ? `${infoUser} bg-white` : `${infoUser} bg-dark-blue`}>
-        <ProfileInfo button={button} info={info} formatDate={() => formatDate(info)} />
+        <ProfileInfo button={button} info={info} formatDate={formatDate} />
         <p className={button ?
           'tablet:w-[493px] desktop:w-[480px] desktop:translate-x-[145px] desktop:translate-y-[-40px] text-[13px] tablet:text-[15px] text-blueish-gray leading-6 ml-2'
           :

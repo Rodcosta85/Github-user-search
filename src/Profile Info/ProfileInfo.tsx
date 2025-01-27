@@ -1,21 +1,15 @@
-import { useState } from 'react';
 import DefaultAvatar from '../assets/default-avatar.png';
+import { apiProps } from '../typings';
 
 interface ProfileInfopProps {
     button: boolean,
-    formatDate: () => string,
-    info: {
-        avatar_url: string,
-        name: string,
-        login: string,
-        created_at: string
-    }
+    formatDate: (info: apiProps) => string,
+    info: apiProps;
 }
 
 
 
 const ProfileInfo: React.FC<ProfileInfopProps> = ({ button, info, formatDate }) => {
-
     
     return (
         <div className='w-[233px] h-[70px] flex flex-row justify-between items-center gap-[19px]
@@ -43,7 +37,7 @@ const ProfileInfo: React.FC<ProfileInfopProps> = ({ button, info, formatDate }) 
                     :
                     'w-[250px] text-[13px] tablet:text-[15px] desktop:text-[15px] text-white col-start-2 row-start-1 desktop:mt-2 desktop:ml-12'
                     }>
-                    Joined {'in...'}
+                    Joined {info.created_at === '' ? 'in...' : formatDate(info)}
                 </p>
             </div>
         </div>
